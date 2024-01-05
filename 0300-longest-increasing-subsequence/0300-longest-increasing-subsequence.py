@@ -1,17 +1,18 @@
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        # n^2 algorithm
-        n = len(nums)
-        dp = [[-1] * n for i in range(n)]
-        def solve(i, j):
-            if i >= n: return 0 
-            ans = 0
-            if j != -1 and dp[i][j] != -1: return dp[i][j]
-            if nums[i] > nums[j] or j == -1:
-                ans = 1 + solve(i + 1, i)
-            ans = max(ans, solve(i+1, j)) 
-            dp[i][j] = ans
-            return ans
+        # nlogn algorithm
         
-        return solve(0, -1)
+        ans = 1
+        n = len(nums)
+        cur = [nums[0]]
+        l = 1
+        for i in range(1, n):
+            ind = bisect.bisect_left(cur, nums[i]) 
+            if ind != l:
+                cur[ind] = nums[i] 
+            else:
+                cur.append(nums[i]) 
+                l += 1
+            ans = max(ans, ind + 1)
+        return ans
             
