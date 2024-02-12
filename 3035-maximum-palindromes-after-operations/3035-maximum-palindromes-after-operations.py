@@ -14,10 +14,9 @@ class Solution:
         
         cnt = 0
         for i in length:
-            if pairs >= i // 2:
-                pairs -= i // 2
-                cnt += 1
-            else: break
+            if pairs < i // 2: break
+            pairs -= i // 2
+            cnt += 1
         
         return cnt
         
