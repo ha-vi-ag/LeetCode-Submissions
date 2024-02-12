@@ -17,6 +17,7 @@ class Solution:
             if pairs >= i // 2:
                 pairs -= i // 2
                 cnt += 1
+            else: break
         
         return cnt
         
